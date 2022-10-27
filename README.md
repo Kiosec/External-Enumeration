@@ -357,5 +357,5 @@ done < $file
 
 ## Port 15672 - RabbitMQ
 ```
-The default password is guest:guest
+The default credentials are guest:guest
 ```
