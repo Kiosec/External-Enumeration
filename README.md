@@ -293,7 +293,22 @@ rdesktop -u <username> <IP>
 rdesktop -d <domain> -u <username> -p <password> <IP>
 ```
 
+## Port 5672 - AMQP
 
+#### Enumeration using nmap
+```
+nmap -sV -Pn -n -T4 -p 5672 --script amqp-info 10.0.0.1
+```
+
+#### Enumeration script
+```
+import amqp
+
+conn = amqp.connection.Connection(host="10.0.0.1", port=5672, virtual_host="/")
+conn.connect()
+for k,v in conn.server_properties.items():
+    print(k,v)
+```
 
 ## Port 5985
 
@@ -306,4 +321,38 @@ ruby evil-winrm.rb -i <IP> -u <USERNAME> -p <PASSWORD>
 OR
 gem evil-winrm
 evil-winrm -i <IP> -u <USERNAME> -p <PASSWORD>
+```
+
+## Port 11211 - Memcache
+
+#### Nmap enumeration
+```
+nmap -n -sV --script memcached-info -p 11211 10.0.0.1
+```
+
+#### Manual enumeration
+```
+echo "version" | nc -vn -w 1 <IP> 11211      #Get version
+echo "stats" | nc -vn -w 1 <IP> 11211        #Get status
+echo "stats slabs" | nc -vn -w 1 <IP> 11211  #Get slabs
+echo "stats items" | nc -vn -w 1 <IP> 11211  #Get items of slabs with info
+echo "stats cachedump <number> 0" | nc -vn -w 1 <IP> 11211  #Get key names (the 0 is for unlimited output size)
+echo "get <item_name>" | nc -vn -w 1 <IP> 11211  #Get saved info
+```
+
+#### Extraction data script
+```
+➤ Install and use memcdump
+mencdump --verbose --debug --servers=10.0.0.1 | tee keys.lst
+
+➤ Execute the script
+#!/bin/bash
+
+file="keys.lst" #file which contains the keys
+while read -r line
+do
+    echo "get $line | nc -vn -w 1 10.0.0.1 112111 > $line.txt
+done < $file
+```
+
 ```
