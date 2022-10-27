@@ -354,5 +354,3 @@ do
     echo "get $line | nc -vn -w 1 10.0.0.1 112111 > $line.txt
 done < $file
 ```
-
-```
