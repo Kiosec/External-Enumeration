@@ -354,3 +354,8 @@ do
     echo "get $line | nc -vn -w 1 10.0.0.1 112111 > $line.txt
 done < $file
 ```
+
+## Port 15672 - RabbitMQ
+```
+The default password is guest:guest
+```
