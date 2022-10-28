@@ -29,12 +29,30 @@ dirb http://10.0.0.1/abc/ /usr/share/wordlists/dirb/big.txt
 ```
 gobuster -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/common.txt -e -t 20
 gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/big.txt -t 30 -e -k -x .html,.php,.asp,.aspx,.htm,.xml,.json,.jsp,.pl
+
+➤ Error: the server returns a status code that matches the provided options for non existing urls. https://10.0.0.1 => 200 (Length: 1474).
+Solution - exclude the specific length :  --exclude-length [size]
+Example : gobuster -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/common.txt -e -t 20 --exclude-length 1474
+
+➤ Error: the server returns a status code that matches the provided options for non existing urls. https://10.0.0.1 => 401 (Length: 98).
+Solution - exclude the 401 status code : -b 404,401
+Example : gobuster -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/common.txt -e -t 20 -b 404,401
 ```
 
 
 ## Vulnerability scanner
 ```
 nikto -host=http://example.com
+```
+
+## Online enumeration tools
+```
+https://dnsdumpster.com/
+https://search.censys.io/
+https://crt.sh/
+//https://spyonweb.com/
+https://archive.org/
+https://www.robtex.com/
 ```
 
 ## Port 21
