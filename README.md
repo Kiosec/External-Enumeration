@@ -21,6 +21,16 @@ ls -l /usr/share/nmap/scripts/smb*
 
 ## Fuzzing
 
+#### Knockpy - Subdomain fuzzing
+```
+knockpy domain.com -w /usr/share/wordlists/list --silent csv -o /path/to/new/folder
+
+usage: knockpy [-h] [-v] [--no-local] [--no-remote] [--no-scan] [--no-http] 
+               [--no-http-code CODE [CODE ...]] [--dns DNS] [-w WORDLIST] 
+               [-o FOLDER] [-t SEC] [-th NUM] [--silent [{False,json,json-pretty,csv}]]
+               domain
+```
+
 #### Dirb
 ```
 dirb http://10.0.0.1/abc/ /usr/share/wordlists/dirb/big.txt  
