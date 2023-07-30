@@ -37,7 +37,7 @@ dirb http://10.0.0.1/abc/ /usr/share/wordlists/dirb/big.txt
 ```
 #### Gobuster
 ```
-gobuster -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/common.txt -e -t 20
+gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/common.txt -e -t 20
 gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/big.txt -t 30 -e -k -x .html,.php,.asp,.aspx,.htm,.xml,.json,.jsp,.pl
 
 ➤ Error: the server returns a status code that matches the provided options for non existing urls. https://10.0.0.1 => 200 (Length: 1474).
