@@ -119,6 +119,11 @@ lexis@10.0.0.1's password:
 sh-05$
 ```
 
+#### SSH connection using id_rsa private key
+```
+ssh -i id_rsa kiosec@10.0.0.1
+```
+
 ## Port 25
 #### Basic connection
 ```
