@@ -121,6 +121,7 @@ sh-05$
 
 #### SSH connection using id_rsa private key
 ```
+chmod 600 id_rsa
 ssh -i id_rsa kiosec@10.0.0.1
 ```
 
