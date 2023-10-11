@@ -158,6 +158,9 @@ rpcclient -U "" 10.0.0.1
     netshareenumall
 ```
 
+```
+nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.0.0.1
+```
 
 ## Port 139, 445
 #### Basic enumeration
@@ -176,6 +179,9 @@ nmap -v -p 139,445 --script=smb* 10.0.0.1
 nmap -p 445,139 -Pn --script=smb-vuln-*.nse 10.0.0.1 // Do not return all vuln because some script needs specific args
 nmap -v -p 139,445 --script=smb-vuln-ms08-067 --script-args=unsafe=1 10.0.0.1
 nmap --script smb-vuln-cve-2017-7494 --script-args smb-vuln-cve-2017-7494.check-version -p445 10.0.0.1
+
+#Enumerate the shares
+nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.131.49
 
 ```
 
