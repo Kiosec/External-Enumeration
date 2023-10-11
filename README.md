@@ -222,6 +222,13 @@ Solution: Intercept the trafic of the command ‘smbclient -L \\<IP> with wiresh
 ```
 smb://<ip>/<folder>
 ```
+
+#### Download a share folder
+```
+#Example with the folder named anonymous
+smbget -R smb://10.0.0.1/anonymous
+```
+
 #### Mount a share folder
 ```
 mount -t cifs //10.0.0.1/share /mnt/share
