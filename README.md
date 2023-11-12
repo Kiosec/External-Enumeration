@@ -212,6 +212,30 @@ nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.0.0.1
 smbclient -L \\10.0.0.1
 smbclient -L 10.0.0.1 -U anonymous
 smbclient -L 10.0.0.1 --options='client min protocol=NT1'
+
+smbclient \\\\10.10.155.41\\<share_name>
+```
+
+#### SMBClient - download everything for what we have permission
+```
+root@ip-10-10-148-27:~# smbclient \\\\10.10.155.41\\Users
+WARNING: The "syslog" option is deprecated
+Enter WORKGROUP\root's password: 
+Try "help" to get a list of possible commands.
+smb: \> dir
+  .                                  DR        0  Fri Mar 12 02:11:49 2021
+  ..                                 DR        0  Fri Mar 12 02:11:49 2021
+  Administrator                       D        0  Thu Mar 11 21:55:48 2021
+  All Users                         DHS        0  Sat Sep 15 08:28:48 2018
+  atlbitbucket                        D        0  Thu Mar 11 22:53:06 2021
+<...>
+smb: \> recurse on
+smb: \> prompt off
+smb: \> mget *
+NT_STATUS_ACCESS_DENIED listing \Administrator\*
+STATUS_STOPPED_ON_SYMLINK listing \All Users\*
+STATUS_STOPPED_ON_SYMLINK listing \*
+smb: \All Users\> 
 ```
 
 #### SMBmap List the rights on the folders / recursif mode
