@@ -1,27 +1,71 @@
 # External-Enumeration
 
-##  NMAP
+## Table of contents
 
-#### Silent mode
+##### ➤ Enumeration
+
+* [1. Port Scanning](#port-scanning)
+* [2. Fuzzing](#Automated-enumeration)
+* [3. Vulnerability scan](#Automated-enumeration)
+* [4. Online enumeration tools](#Automated-enumeration)
+
+##### ➤ Ports (detailed view)
+
+* [Port 21](#port-21)
+* [Port 22](#port-22)
+* [Port 25](#port-25)
+* [Port 80](#port-80)
+* [Port 88](#port-88)
+* [Port 110](#port-110)
+* [Port 111](#port-111)
+* [Port 139, 445](#port-139,-445)
+* [Port 143](#port-143)
+* [Port 389](#port-389)
+* [Port 587](#port-587)
+* [Port 1433](#port-1433)
+* [Port 3389](#port-3389)
+* [Port 5672](#port-5672)
+* [Port 5985](#port-5985)
+* [Port 11211](#port-11211)
+* [Port 15672](#port-15672)
+
+
+# 
+# ⭕ Enumeration 
+
+## 🔻Port scanning
+
+##### ➤ Nmap
+
+###### • Silent mode
 ```
 nmap -sS -sV -vv -Pn -p<PORT> <IP>
 ```
-#### Agressive mode
+
+###### • Agressive mode
 ```
 nmap -T4 -sS -A -p- <IP>
+
+nmap -T4 -sS -sC -p- -Pn <IP>
 ```
-#### UDP Scan
+
+###### • UDP Scan
 ```
 nmap -T4 -sUV <IP>
+
+nmap -T4 -A -sUV --top-ports 1000 -Pn <IP>
 ```
-#### List the nmap script
+
+###### • List the nmap script
 ```
 ls -l /usr/share/nmap/scripts/smb*
 ```
 
-## Fuzzing
+##### ➤ Masscan
 
-#### Knockpy - Subdomain fuzzing
+## 🔻Fuzzing
+
+##### ➤ Knockpy - Subdomain fuzzing
 ```
 knockpy domain.com -w /usr/share/wordlists/list --silent csv -o /path/to/new/folder
 
@@ -31,11 +75,12 @@ usage: knockpy [-h] [-v] [--no-local] [--no-remote] [--no-scan] [--no-http]
                domain
 ```
 
-#### Dirb
+##### ➤ Dirb
 ```
 dirb http://10.0.0.1/abc/ /usr/share/wordlists/dirb/big.txt  
 ```
-#### Gobuster
+
+##### ➤ Gobuster
 ```
 gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/common.txt -e -t 20
 gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/big.txt -t 30 -e -k -x .html,.php,.asp,.aspx,.htm,.xml,.json,.jsp,.pl
@@ -50,12 +95,12 @@ gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/big.txt -t 30 -e -
 ```
 
 
-## Vulnerability scanner
+## 🔻Vulnerability scanner
 ```
 nikto -host=http://example.com
 ```
 
-## Online enumeration tools
+## 🔻Online enumeration tools
 ```
 https://dnsdumpster.com/
 https://search.censys.io/
@@ -64,7 +109,10 @@ https://archive.org/
 https://www.robtex.com/
 ```
 
-## Port 21
+# 
+# ⭕ Ports (detailled view)
+
+## 🔻Port 21
 #### Vuln detection using nmap
 ```
 nmap -p 21 -sV -sC --script="ftp-vuln-*, ftp-anon" 10.0.0.1-254
@@ -88,7 +136,7 @@ binary
 get <filename>
 ```
 
-## Port 22
+## 🔻Port 22
 #### Hydra - Bruteforcing
 ```
 hydra -s 22 -v -t 4 -l root -P /usr/share/wordlists/rockyou.txt 10.0.0.1 ssh
@@ -125,7 +173,7 @@ chmod 600 id_rsa
 ssh -i id_rsa kiosec@10.0.0.1
 ```
 
-## Port 25
+## 🔻Port 25
 #### Basic connection
 ```
 telnet 10.0.0.1 25
@@ -146,12 +194,12 @@ VRFY {username}
 550 5.1.1 <admin>: Recipient address rejected:User unknown in local recipient table
 ```
 
-## Port 80
+## 🔻Port 80
 ```
 wpscan --url http://10.0.0.1/ --passwords /usr/share/wordlists/rockyou.txt --usernames admin --api-token {token-api}
 ```
 
-## Port 88
+## 🔻Port 88
 ```
 Service : kerberos-sec  Microsoft Windows Kerberos
 
@@ -167,8 +215,8 @@ root@kali:~# ./kerbrute_linux_amd64 passwordspray -d <domain_name> domain-users.
 ```
 
 
-## Port 110
-## Port 111
+## 🔻Port 110
+## 🔻Port 111
 ```
 rpcinfo -p 10.0.0.1
 rpcclient -U "" 10.0.0.1
@@ -184,7 +232,7 @@ rpcclient -U "" 10.0.0.1
 nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.0.0.1
 ```
 
-## Port 139, 445
+## 🔻Port 139, 445
 #### Basic enumeration
 ```
 enum4linux -a 10.0.0.1
@@ -297,8 +345,8 @@ STATUS_LOGIN_FAILURE : incorrect password
 ```
 
 
-## Port 143
-## Port 389
+## 🔻Port 143
+## 🔻Port 389
 
 #### Without user account
 ```
@@ -347,8 +395,8 @@ OR
 ```
 
 
-## Port 587
-## Port 1433
+## 🔻Port 587
+## 🔻Port 1433
 #### Basic connection using sqsh
 ```
 sqsh -U sa -P password -S 10.0.0.1:1433 -D mydb
@@ -361,7 +409,7 @@ go -m pretty
 #### Activate xp_cmdshell
 
 
-## Port 3389
+## 🔻Port 3389
 
 #### Nmap - Scan vuln
 ```
@@ -379,7 +427,7 @@ rdesktop -u <username> <IP>
 rdesktop -d <domain> -u <username> -p <password> <IP>
 ```
 
-## Port 5672 - AMQP
+## 🔻Port 5672 - AMQP
 
 #### Enumeration using nmap
 ```
@@ -396,7 +444,7 @@ for k,v in conn.server_properties.items():
     print(k,v)
 ```
 
-## Port 5985
+## 🔻Port 5985
 
 #### login remotely over WinRM (using TGT ticket as example)
 
@@ -409,7 +457,7 @@ gem evil-winrm
 evil-winrm -i <IP> -u <USERNAME> -p <PASSWORD>
 ```
 
-## Port 11211 - Memcache
+## 🔻Port 11211 - Memcache
 
 #### Nmap enumeration
 ```
@@ -441,7 +489,7 @@ do
 done < $file
 ```
 
-## Port 15672 - RabbitMQ
+## 🔻Port 15672 - RabbitMQ
 ```
 The default credentials are guest:guest
 ```
