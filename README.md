@@ -81,6 +81,13 @@ dirb http://10.0.0.1/abc/ /usr/share/wordlists/dirb/big.txt
 ```
 
 ##### ➤ Gobuster
+
+###### Extension list
+```
+.html,.php,.asp,.aspx,.htm,.xml,.json,.jsp,.pl,.ini,.bak,.bck.
+```
+
+###### Bruteforce
 ```
 gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/common.txt -e -t 20
 gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/big.txt -t 30 -e -k -x .html,.php,.asp,.aspx,.htm,.xml,.json,.jsp,.pl
@@ -92,6 +99,11 @@ gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/big.txt -t 30 -e -
 ➤ Error: the server returns a status code that matches the provided options for non existing urls. https://10.0.0.1 => 401 (Length: 98).
    Solution - exclude the 401 status code : -b 404,401
    Example : gobuster -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/common.txt -e -t 20 -b 404,401
+```
+
+###### Fuzzing
+```
+gobuster fuzz -u http://10.0.0.1/user/FUZZ/condig -w /usr/share/wordlists/dirb/common.txt -e -t 20
 ```
 
 
@@ -150,7 +162,14 @@ get <filename>
 ## 🔻Port 22
 #### ➤ Hydra - Bruteforcing
 ```
+#Hydra - Bruteforce specific user
 hydra -s 22 -v -t 4 -l root -P /usr/share/wordlists/rockyou.txt 10.0.0.1 ssh
+
+#Hydra - Password spraying
+hydra -L user.txt -p password01! 10.0.0.1 ssh
+
+#Hydra - Full bruteforce
+hydra -L user.txt -P rockyou.txt 10.10.219.212 ssh
 ```
 
 #### ➤ SSH connection
