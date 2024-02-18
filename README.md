@@ -164,7 +164,7 @@ binary
 get <filename>
 ```
 
-#### ➤ Common Error
+#### ➤ Common Errors
 ```
 ➤ 229 Entering Extended Passive Mode (|||26826|)
 ```
