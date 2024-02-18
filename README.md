@@ -63,6 +63,10 @@ ls -l /usr/share/nmap/scripts/smb*
 ```
 
 ##### ➤ Masscan
+```
+masscan -p21,22,443,8000-8100 10.0.0.0/24
+```
+
 
 ## 🔻Fuzzing
 
