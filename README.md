@@ -164,6 +164,13 @@ binary
 get <filename>
 ```
 
+#### ➤ Common Error
+
+➤ 229 Entering Extended Passive Mode (|||26826|)
+
+![image](https://github.com/Kiosec/External-Enumeration/assets/100965892/87976e59-04e6-41e9-bc23-c9d0f71b7d4f)
+
+
 ## 🔻Port 22
 #### ➤ Hydra - Bruteforcing
 ```
