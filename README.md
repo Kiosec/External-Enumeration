@@ -333,7 +333,7 @@ smb: \All Users\>
 smbmap -H 10.0.0.1
 
 ➤ Reculsive enumeration
-smbmap -H 10.0.0.1 -R
+smbmap -H 10.0.0.1 -r
 
 ➤ Recursive enumeration on a specific folder
 smbmap -H 10.0.0.1 -R 'Replication\active.htb'
