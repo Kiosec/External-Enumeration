@@ -363,6 +363,10 @@ smb://<ip>/<folder>
 ```
 #Example with the folder named anonymous
 smbget -R smb://10.0.0.1/anonymous
+
+#Example with a specific file
+smbget -r smb://10.0.0.1/folder/file
+press enter
 ```
 
 #### Mount a share folder
