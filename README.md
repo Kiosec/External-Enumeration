@@ -120,8 +120,16 @@ gobuster fuzz -u http://10.0.0.1/user/FUZZ/condig -w /usr/share/wordlists/dirb/c
 
 
 ## 🔻Vulnerability scanner
+
+##### ➤ Nikto
 ```
 nikto -host=http://example.com
+```
+
+##### ➤ Automatic Searchsploit analysis through Nmap results
+```
+nmap -T4 -sC -sV -p- --min-rate=1000 10.0.0.1 -oX output.xml
+searchsploit --nmap output.xml 
 ```
 
 ## 🔻Online enumeration tools
