@@ -38,6 +38,11 @@
 
 ##### ➤ Nmap
 
+###### • Detect active host
+```
+ nmap -sn -T4 10.0.0.0/24 -oN active-hosts
+```
+
 ###### • Silent mode
 ```
 nmap -sS -sV -vv -Pn -p<PORT> <IP>
@@ -48,6 +53,8 @@ nmap -sS -sV -vv -Pn -p<PORT> <IP>
 nmap -T4 -sS -A -p- <IP>
 
 nmap -T4 -sS -sC -p- -Pn <IP>
+
+nmap -T4 -sC -sV -p- --min-rate=1000 <IP>
 ```
 
 ###### • UDP Scan
