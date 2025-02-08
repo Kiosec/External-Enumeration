@@ -38,6 +38,8 @@
 
 ##### ➤ Nmap
 
+**Note:** If nmap is not executed with root access rights, it is required to used -sT parameter rather than -sS, otherwise all ports will be appear filtered.
+
 ###### • Detect active host
 ```
  nmap -sn -T4 10.0.0.0/24 -oN active-hosts
