@@ -414,6 +414,25 @@ STATUS_LOGIN_FAILURE : incorrect password
 ## 🔻Port 143
 ## 🔻Port 389
 
+#### User enumeration using LDAP PING
+Explanation : https://blog.netwrix.com/2022/12/13/using-ldap-ping-to-enumerate-active-directory-users/
+Github : https://github.com/lkarlslund/ldapnomnom
+```
+┌─[✗]─[root@htb-tuswhlsdcc]─[/home/kiosec/Documents]
+└──╼ #./ldapnomnom-linux-x64 --input xato-net-10-million-usernames.txt --server test.com --maxservers 32 --parallel 16
+ __    ____  _____ _____                             
+|  |  |    \|  _  |  _  |___ ___ _____ ___ ___ _____ 
+|  |__|  |  |     |   __|   | . |     |   | . |     |
+|_____|____/|__|__|__|  |_|_|___|_|_|_|_|_|___|_|_|_|
+prerelease
+
+IN  SPACE  NO  ONE  CAN  HEAR  YOU  NOM  NOM  USERNAMES
+
+guest
+administrator
+
+```
+
 #### Without user account
 ```
 ➤ Anonymous connection attempt (-x). With the example test.com : DOMAIN = test and DOMAIN2 = com
