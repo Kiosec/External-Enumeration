@@ -18,7 +18,7 @@
 * [Port 88](#port-88)
 * [Port 110](#port-110)
 * [Port 111](#port-111)
-* [Port 139, 445](#port-139,-445)
+* [Port 139, 445](#port-139-445)
 * [Port 143](#port-143)
 * [Port 389](#port-389)
 * [Port 587](#port-587)
@@ -294,7 +294,7 @@ nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.0.0.1
 ## 🔻Port 139, 445
 #### Basic enumeration
 ```
-enum4linux -a 10.0.0.1
+enum4linux -A 10.0.0.1
 enum4linux 10.0.0.1 -u anonymous
 ```
 
