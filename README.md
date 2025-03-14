@@ -437,7 +437,7 @@ administrator
 ```
 ➤ Anonymous connection attempt (-x). With the example test.com : DOMAIN = test and DOMAIN2 = com
 ldapsearch -h 10.129.136.235 -p 389 -x -b "dc=htb,dc=local"   
-ldapsearch -H ldap://cicada.htb:389/ -x -s base -b '' "(objectClass=*)" "*" +
+ldapsearch -H ldap://machine.htb:389/ -x -s base -b '' "(objectClass=*)" "*" +
 
 ➤ Enumerate all AD users (https://github.com/ropnop/windapsearch)
 ./windapsearch.py -d test.com --dc-ip 10.0.0.1 -U
