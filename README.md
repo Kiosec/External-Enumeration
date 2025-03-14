@@ -295,6 +295,7 @@ nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.0.0.1
 #### Basic enumeration
 ```
 enum4linux -a 10.0.0.1
+enum4linux 10.0.0.1 -u anonymous
 ```
 
 #### List nmap scripts - Detection vuln port 445,139
