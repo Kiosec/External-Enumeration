@@ -325,7 +325,9 @@ smbclient \\\\10.10.155.41\\<share_name>
 
 #### SMBClient - download everything for what we have permission
 ```
-root@ip-10-10-148-27:~# smbclient \\\\10.10.155.41\\Users
+#Be careful to access a folder that you are minumum a read only permission. (check with smbmap before)
+#In the example below, HR is a folder with read only permission
+root@ip-10-10-148-27:~# smbclient \\\\10.10.155.41\\HR
 WARNING: The "syslog" option is deprecated
 Enter WORKGROUP\root's password: 
 Try "help" to get a list of possible commands.
