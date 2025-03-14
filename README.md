@@ -430,7 +430,11 @@ IN  SPACE  NO  ONE  CAN  HEAR  YOU  NOM  NOM  USERNAMES
 
 guest
 administrator
+```
 
+#### User enumeration using Null Session
+```
+nxc smb 10.129.219.77 -u '' -p '' --users
 ```
 
 #### Without user account
