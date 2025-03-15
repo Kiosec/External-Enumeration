@@ -115,11 +115,22 @@ gobuster dir -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/big.txt -t 30 -e -
    Example : gobuster -u http://10.0.0.1/ -w /usr/share/wordlists/dirb/common.txt -e -t 20 -b 404,401
 ```
 
-###### Fuzzing
+##### ➤ Feroxbuster
+```
+feroxbuster -u http://10.0.0.1 -w /usr/share/seclists/Discovery/DNS/bug-bounty-program-subdomains-trickest-inventory.txt  --threads 30 -C 404,403
+OR
+feroxbuster -u http://mydomain.com -w /usr/share/seclists/Discovery/DNS/bug-bounty-program-subdomains-trickest-inventory.txt  --threads 30 -C 404,403
+```
+
+####  ➤ Fuzzing
 ```
 gobuster fuzz -u http://10.0.0.1/user/FUZZ/condig -w /usr/share/wordlists/dirb/common.txt -e -t 20
 ```
 
+####  ➤  Fuzzing Virtual Host
+```
+ffuf -u http://mywebsite.com -w /usr/share/seclists/Discovery/DNS/bug-bounty-program-subdomains-trickest-inventory.txt -H 'Host: FUZZ.mywebsite.com' -fs 15949
+```
 
 ## 🔻Vulnerability scanner
 
