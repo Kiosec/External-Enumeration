@@ -190,6 +190,10 @@ put <filename>
 ➤ Download a file (to the folder where the shell has been started)
 binary
 get <filename>
+
+ex:
+get test.zip
+get "Access Control.zip"
 ```
 
 #### ➤ Common Errors
