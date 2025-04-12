@@ -661,6 +661,10 @@ ruby evil-winrm.rb -i <IP> -u <USERNAME> -p <PASSWORD>
 OR
 gem evil-winrm
 evil-winrm -i <IP> -u <USERNAME> -p <PASSWORD>
+
+ex:
+evil-winrm -i 10.0.0.1 -u svc-securiry --password 'mystr0ngpasssword!'
+
 ```
 
 ## 🔻Port 11211 - Memcache
