@@ -497,10 +497,10 @@ STATUS_LOGIN_FAILURE : incorrect password
 
 #### SMNP enumeration
 ```
-# Using snmpbulkwalk
+➤  Using snmpbulkwalk
 $ snmpbulkwalk -c public -v2c 10.0.0.1 .
 
-# using snmp-chek (Prefered to detect dedicated tools running)
+➤  using snmp-chek (Prefered to detect dedicated tools running)
 #Example :
 kali@kali:~$ snmp-check 10.0.0.1
 snmp-check v1.9 - SNMP enumerator
@@ -511,9 +511,6 @@ Copyright (c) 2005-2015 by Matteo Cantoni (www.nothink.org)
   3765                  runnable              clamd                 /usr/local/sbin/clamd                      
   3767                  runnable              clamav-milter         /usr/local/sbin/clamav-milter  --black-hole-mode -l -o -q /var/run/clamav/clamav-milter.ctl
   3776                  runnable              inetd                 /usr/sbin/inetd
-```
-
-
 ```
 
 
