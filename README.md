@@ -21,6 +21,7 @@
 * [Port 111](#port-111)
 * [Port 139, 445](#port-139-445)
 * [Port 143](#port-143)
+* [Port 161, 162, 10161, 1016 (udp)](#port-161-162-10161-10162-udp)
 * [Port 389](#port-389)
 * [Port 587](#port-587)
 * [Port 1433](#port-1433)
@@ -271,6 +272,25 @@ C:\Users\security>
 ```
 
 ## 🔻Port 25
+
+#### Documentation
+
+| Command   | Description |
+|-----------|-------------|
+| `HELO`    | Used to initiate an SMTP conversation with an email server. The command is followed by an IP address or a domain name (e.g., `HELO 10.1.2.14`). |
+| `EHLO`    | Used to initiate a conversation with an Extended SMTP (ESMTP) server. Works the same way as `HELO`, but for ESMTP. |
+| `STARTTLS`| Used to start a secure TLS (Transport Layer Security) connection to an email server. |
+| `RCPT`    | Used to specify the recipient's email address. |
+| `DATA`    | Used to initiate the transfer of the email message content. |
+| `RSET`    | Used to reset (cancel) the current email transaction. |
+| `MAIL`    | Used to specify the sender's email address. |
+| `QUIT`    | Used to close the connection with the server. |
+| `HELP`    | Used to display a help menu (if available). |
+| `AUTH`    | Used to authenticate a client to the email server. |
+| `VRFY`    | Used to verify whether a user's email mailbox exists. |
+| `EXPN`    | Used to request or expand a mailing list on the remote server. |
+
+
 #### Basic connection
 ```
 telnet 10.0.0.1 25
