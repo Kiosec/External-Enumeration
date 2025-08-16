@@ -26,6 +26,7 @@
 * [Port 587](#port-587)
 * [Port 1433](#port-1433)
 * [Port 2375](#port-2375)
+* [Port 3218](#port-3128)
 * [Port 3389](#port-3389)
 * [Port 5672](#port-5672)
 * [Port 5985](#port-5985,-5986)
@@ -642,6 +643,27 @@ curl http://10.0.0.1:2375/version
 # To test if we can run commands, we'll list the containers on the target
 docker -H tcp://10.0.0.1:2375 ps
 ```
+
+
+## 🔻Port 3218
+
+Squid is a caching and forwarding HTTP web proxy. It has a wide variety of uses, including speeding up a web server by caching repeated requests, caching web, DNS and other computer network lookups for a group of people sharing network resources, and aiding security by filtering traffic. Although primarily used for HTTP and FTP, Squid includes limited support for several other protocols including Internet Gopher, SSL, TLS and HTTPS. Squid does not support the SOCKS protocol, unlike Privoxy, with which Squid can be used in order to provide SOCKS support. (From here).
+
+#### Automated scan
+
+SPOSE scanner Alternatively, the Squid Pivoting Open Port Scanner (https://github.com/aancw/spose) can be used.
+
+```
+git clone https://github.com/aancw/spose.git
+python spose.py --proxy http://$IP:3128 --target $IP
+```
+
+<img width="833" height="143" alt="image" src="https://github.com/user-attachments/assets/bef2b3db-4f04-49f4-a8c1-1c1ab84cb518" />
+
+You can configure foxyproxy to access to port through navigator (e.g., 8080).
+
+<img width="1435" height="305" alt="image" src="https://github.com/user-attachments/assets/b5826141-611c-4918-baae-97fee55efc2e" />
+
 
 
 ## 🔻Port 3389
