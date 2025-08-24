@@ -5,7 +5,7 @@
 ##### ➤ Enumeration
 
 * [1. Port Scanning](#port-scanning)
-* [2. Fuzzing](#Automated-enumeration)
+* [2. Fuzzing](#fuzzing)
 * [3. Vulnerability scan](#Automated-enumeration)
 * [4. Online enumeration tools](#Automated-enumeration)
 
