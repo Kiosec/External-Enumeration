@@ -381,6 +381,7 @@ smbclient -L 10.0.0.1 -U anonymous
 smbclient -L 10.0.0.1 --options='client min protocol=NT1'
 
 smbclient \\\\10.10.155.41\\<share_name>
+smbclient \\\\10.10.155.41\\<share_name> -U username
 ```
 
 #### SMBClient - download everything for what we have permission
