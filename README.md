@@ -537,7 +537,7 @@ administrator
 
 #### User enumeration using Null Session
 ```
-nxc smb 10.129.219.77 -u '' -p '' --users
+nxc ldap 10.129.219.77 -u '' -p '' --users
 ```
 
 #### Without user account
