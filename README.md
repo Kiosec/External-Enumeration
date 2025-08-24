@@ -418,7 +418,7 @@ smbmap -H 10.0.0.1 -r
 smbmap -H 10.0.0.1 -R 'Replication\active.htb'
 
 ➤ Authenticated enumeration
-smbmap -H 10.0.0.1 -u 'SVC_TGS' -p 'GPPstillStandingStrong2k18' -R
+smbmap -H 10.0.0.1 -u 'SVC_TGS' -p 'mySuperStrongPassword!' -r
 
 ➤ Download a file
 smbmap -H 10.10.0.1 --download '.\Users\SVC_TGS\Desktop\user.txt'
