@@ -517,6 +517,11 @@ Copyright (c) 2005-2015 by Matteo Cantoni (www.nothink.org)
 
 ## 🔻Port 389
 
+#### Nmap scan
+```
+nmap -n -sV --script "ldap* and not brute" <IP> 
+```
+
 #### User enumeration using LDAP PING
 Explanation : https://blog.netwrix.com/2022/12/13/using-ldap-ping-to-enumerate-active-directory-users/
 Github : https://github.com/lkarlslund/ldapnomnom
@@ -538,6 +543,15 @@ administrator
 #### User enumeration using Null Session
 ```
 nxc ldap 10.129.219.77 -u '' -p '' --users
+```
+
+#### LDAPdomaindump
+```
+# With Credentials
+ldapdomaindump -u security.local\\<User> -p '<Password>' ldap://<IP>
+
+# Without credentials
+ldapdomaindump ldap://<IP>
 ```
 
 #### Without user account
