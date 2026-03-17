@@ -20,7 +20,7 @@
 * [Port 110](#port-110)
 * [Port 111](#port-111)
 * [Port 139, 445](#port-139-445)
-* [Port 143](#port-143)
+* [Port 143, 993](#port-143-993)
 * [Port 161, 162, 10161, 1016 (udp)](#port-161-162-10161-10162-udp)
 * [Port 389](#port-389)
 * [Port 587](#port-587)
@@ -557,8 +557,13 @@ See : https://github.com/Kiosec/Cracking/blob/main/README.md#netntlmv2ntlmv2-has
 ```
 
 
-## 🔻Port 143
+## 🔻Port 143, 993
+#### IMAP bruteforce
+```
+hydra -t4 -L user.txt -P cewl.txt imap://myhostname
 
+medusa -h <IP> -u <username> -P passwords.txt -M imap
+```
 
 ## 🔻Port 161, 162, 10161, 10162 (udp)
 
