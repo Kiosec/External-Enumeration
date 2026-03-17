@@ -312,6 +312,35 @@ VRFY {username}
 550 5.1.1 <admin>: Recipient address rejected:User unknown in local recipient table
 ```
 
+#### User bruteforce
+```
+
+# smtp-user-enum -M VRFY -U user.txt -t 10.0.0.1
+Starting smtp-user-enum v1.2 ( http://pentestmonkey.net/tools/smtp-user-enum )
+
+ ----------------------------------------------------------
+|                   Scan Information                       |
+ ----------------------------------------------------------
+
+Mode ..................... VRFY
+Worker Processes ......... 5
+Usernames file ........... user.txt
+Target count ............. 1
+Username count ........... 12
+Target TCP port .......... 25
+Query timeout ............ 5 secs
+Target domain ............ 
+
+######## Scan started at Mon Mar 16 14:26:14 2026 #########
+10.0.0.1: kiosec exists
+<...>
+10.0.0.1: admin exists
+######## Scan completed at Mon Mar 16 14:26:14 2026 #########
+8 results.
+
+12 queries in 1 seconds (12.0 queries / sec)
+
+
 ## 🔻Port 80
 ```
 wpscan --url http://10.0.0.1/ --passwords /usr/share/wordlists/rockyou.txt --usernames admin --api-token {token-api}
