@@ -339,7 +339,7 @@ Target domain ............
 8 results.
 
 12 queries in 1 seconds (12.0 queries / sec)
-
+```
 
 ## 🔻Port 80
 ```
@@ -363,6 +363,8 @@ root@kali:~# ./kerbrute_linux_amd64 passwordspray -d <domain_name> domain-users.
 
 
 ## 🔻Port 110
+
+
 ## 🔻Port 111
 ```
 rpcinfo -p 10.0.0.1
