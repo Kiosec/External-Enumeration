@@ -29,7 +29,7 @@
 * [Port 3218](#port-3128)
 * [Port 3389](#port-3389)
 * [Port 5672](#port-5672)
-* [Port 5985](#port-5985,-5986)
+* [Port 5985](#port-5985-5986)
 * [Port 11211](#port-11211)
 * [Port 15672](#port-15672)
 
@@ -886,9 +886,11 @@ OR
 gem evil-winrm
 evil-winrm -i <IP> -u <USERNAME> -p <PASSWORD>
 
-ex:
+#ex:
 evil-winrm -i 10.0.0.1 -u svc-securiry --password 'mystr0ngpasssword!'
 
+#Using hash rather than password
+evil-winrm -i mydomaincontrol.local -u 'Administrator' -H 'REDACTED'
 ```
 
 ## 🔻Port 11211 - Memcache
