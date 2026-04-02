@@ -814,8 +814,8 @@ sqsh -U sa -P password -S 10.0.0.1:1433 -D mydb
 ```
 go -m pretty
 ```
-#### Execute command trough sqsh
-#### Activate xp_cmdshell
+#### Other command and details about mssql
+https://github.com/Kiosec/Database-Exploitation/blob/main/README.md#mssql
 
 
 
