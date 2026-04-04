@@ -26,7 +26,7 @@
 * [Port 587](#port-587)
 * [Port 1433](#port-1433)
 * [Port 2375](#port-2375)
-* [Port 3218](#port-3128)
+* [Port 3128](#port-3128)
 * [Port 3389](#port-3389)
 * [Port 5672](#port-5672)
 * [Port 5985](#port-5985-5986)
